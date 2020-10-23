@@ -65,6 +65,9 @@ textarea#gdsDes { width:400px; height:180px; }
 			
 			<form role="form" method="post" autocomplete="off">
 			
+			<input type="hidden" name="gdsNum" value="${goods.gdsNum}" />
+			
+			
 			<div class="inputArea">
 				<label>1차 분류</label>
 				<select class="category1">
@@ -79,28 +82,34 @@ textarea#gdsDes { width:400px; height:180px; }
 			
 			<div class="inputArea">
 				<label for="gdsName">상품명</label>
-				<input type="text" id="gdsName" name="gdsName" />
+				<input type="text" id="gdsName" name="gdsName" value="${goods.gdsName}" />
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsPrice">상품가격</label>
-				<input type="text" id="gdsPrice" name="gdsPrice" />
+				<input type="text" id="gdsPrice" name="gdsPrice" value="${goods.gdsPrice}"/>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsStock">상품수량</label>
-				<input type="text" id="gdsStock" name="gdsStock" />
+				<input type="text" id="gdsStock" name="gdsStock" value="${goods.gdsStock}"/>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsDes">상품소개</label>
-				<textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+				<textarea rows="5" cols="50" id="gdsDes" name="gdsDes">${goods.gdsDes}</textarea>
 			</div>
-			
 			<div class="inputArea">
-				<button type="submit" id="register_Btn">등록</button>
-			</div>
+				<button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
+				<button type="button" id="cancle_Btn" class="btn btn-waring">취소</button>
 				
+				<script>
+					$("#cancle_Btn").click(function(){
+						//history.back();
+						location.href = "/admin/goods/view?n=" + ${goods.gdsNum};
+					});
+				</script>
+			</div>
 			</form>
 			
 		</div>
@@ -115,7 +124,7 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 
 <script>
-// 컨트롤러에서 데이터
+//컨트롤러에서 데이터
 var jsonData = JSON.parse('${category}');
 console.log(jsonData);
 
@@ -181,6 +190,23 @@ $(document).on("change", "select.category1", function(){
 		}
 	});
 });
+
+
+var select_cateCode = '${goods.cateCode}';
+var select_cateCodeRef = '${goods.cateCodeRef}';
+var select_cateName = '${goods.cateName}';
+
+if(select_cateCodeRef != null && select_cateCodeRef != '') {
+	 $(".category1").val(select_cateCodeRef);
+	 $(".category2").val(select_cateCode);
+	 $(".category2").children().remove();
+	 $(".category2").append("<option value='"+ select_cateCode +"'>" + select_cateName + "</option>");
+} else {
+ 	$(".category1").val(select_cateCode);
+ 	//$(".category2").val(select_cateCode);
+ 	// select_cateCod가 부여되지 않는 현상이 있어서 아래 코드로 대체
+ 	$(".category2").append("<option value='"+ select_cateCode +"'selected='selected'>전체 </option>");
+}
 </script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 	<title>han_shop_admin</title>
@@ -21,7 +23,7 @@
 		nav#nav { padding:10px; text-align:right; }
 		nav#nav ul li { display:inline-block; margin-left:10px; }
 		
-		  section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
+		section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
 		section#container::after { content:""; display:block; clear:both; }
 		aside { float:left; width:200px; }
 		div#container_box { float:right; width:calc(100% - 200px - 20px); }
@@ -65,40 +67,59 @@ textarea#gdsDes { width:400px; height:180px; }
 			
 			<form role="form" method="post" autocomplete="off">
 			
+			<input type="hidden" name="n" value="${goods.gdsNum}"/>
+			
 			<div class="inputArea">
 				<label>1차 분류</label>
-				<select class="category1">
-					<option value="">전체</option>
-				</select>
-				
+				<span class="category1"></span>
+			
 				<label>2차 분류</label>
-				<select class="category2" name="cateCode">
-					<option value="">전체</option>
-				</select>
+				<span class="category2">${goods.cateCode}</span>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsName">상품명</label>
-				<input type="text" id="gdsName" name="gdsName" />
+				<span>${goods.gdsName}</span>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsPrice">상품가격</label>
-				<input type="text" id="gdsPrice" name="gdsPrice" />
+				<span><fmt:formatNumber value="${goods.gdsPrice}" pattern="###,###,###"/></span>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsStock">상품수량</label>
-				<input type="text" id="gdsStock" name="gdsStock" />
+				<span>${goods.gdsStock}</span>
 			</div>
 			
 			<div class="inputArea">
 				<label for="gdsDes">상품소개</label>
-				<textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+				<span>${goods.gdsDes}</span>
 			</div>
 			
 			<div class="inputArea">
-				<button type="submit" id="register_Btn">등록</button>
+				<button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
+				<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
+				
+				<script>
+					var formObj = $("form[role='form']");
+					
+					$("#modify_Btn").click(function(){
+						formObj.attr("action", "/admin/goods/modify");
+						formObj.attr("method", "get")
+						formObj.submit();
+					});
+					
+					$("#delete_Btn").click(function(){
+						
+						var con = confirm("정말로 삭제하시겠습니까?")
+						
+						if (con) {
+							formObj.attr("action", "/admin/goods/delete");
+							formObj.submit();
+						}
+					});
+				</script>
 			</div>
 				
 			</form>

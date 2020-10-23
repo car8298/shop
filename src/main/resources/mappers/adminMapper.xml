@@ -6,8 +6,68 @@
 	
 <!-- 카테고리 호출 -->
 <select id="category" resultType="com.han.vo.CategoryVO">
-	select level, cateName, cateCode, cateCodeRef 
-	  from goods_category
+	select 
+		  level, cateName, cateCode, cateCodeRef 
+	  from 
+	      goods_category
     start with cateCodeRef is null connect by prior cateCode = cateCodeRef
 </select>
+
+<!-- 상품 등록 -->
+<insert id="register">
+	insert into tbl_goods ( gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes )
+				   values ( tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes} )
+</insert>
+
+<!-- 상품 목록 -->
+<select id="goodslist" resultType="com.han.vo.GoodsVO">
+	select
+		  gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+	  from
+	      tbl_goods
+  order by
+  		  gdsNum desc
+</select>
+
+	<!-- 상품 조회
+	<select id="goodsView" resultType="com.han.vo.GoodsVO">
+		select
+			  gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		  from
+		  	  tbl_goods
+		 where
+		 	  gdsNum = #{gdsNum}
+	</select>
+	-->
+<!-- 상품조회 및 카테고리 -->
+<select id="goodsView" resultType="com.han.vo.GoodsViewVO">
+	select
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+	  from
+	  	tbl_goods g
+	  		inner join goods_category c
+	  			on g.cateCode = c.cateCode
+	  where g.gdsNum = #{gdsNum}
+
+</select>
+
+<!-- 상품수정 -->
+<update id ="goodsModify">
+	update tbl_goods
+		set
+			gdsName = #{gdsName},
+			cateCode = #{cateCode},
+			gdsPrice = #{gdsPrice},
+			gdsStock = #{gdsStock},
+			gdsDes = #{gdsDes}
+	  where 
+	  		gdsNum = ${gdsNum}
+</update>
+
+<!-- 상품삭제 -->
+<delete id ="goodsDelete">
+	delete tbl_goods
+	where gdsNum = #{gdsNum}
+</delete>
+
 </mapper>
