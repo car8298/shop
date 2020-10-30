@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="/resources/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="/resources/bootstrap/bootstrap-theme.min.css">
 	<script src="/resources/bootstrap/bootstrap.min.js"></script>
+	<script src="/resources/ckeditor/ckeditor.js"></script>
+	
 	
 	<style>
 		body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
@@ -40,6 +42,8 @@ label { display:inline-block; width:70px; padding:5px; }
 label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
+
+.select_img img { width:500px; margin:20px 0; }
 </style>
 	
 </head>
@@ -61,9 +65,9 @@ textarea#gdsDes { width:400px; height:180px; }
 	<section id="container">
 			<%@ include file="../include/aside.jsp" %>
 		<div id="container_box">
-			<h2>상품 등록</h2>
+			<h2>상품 수정</h2>
 			
-			<form role="form" method="post" autocomplete="off">
+			<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 			
 			<input type="hidden" name="gdsNum" value="${goods.gdsNum}" />
 			
@@ -98,6 +102,39 @@ textarea#gdsDes { width:400px; height:180px; }
 			<div class="inputArea">
 				<label for="gdsDes">상품소개</label>
 				<textarea rows="5" cols="50" id="gdsDes" name="gdsDes">${goods.gdsDes}</textarea>
+				<script>
+					var ckeditor_config = {
+							resize_enable : false,
+							enterMode : CKEDITOR.ENTER_BR,
+							shiftEnterMode : CKEDITOR.ENTER_P,
+							filebrowserUploadUrl : "/admin/goods/ckUpload"
+					};
+					
+					CKEDITOR.replace("gdsDes", ckeditor_config);
+				</script>
+			</div>
+			
+			<div class="inputArea">
+				<label for="gdsImg">이미지</label>
+				<input type="file" id="gdsImg" name="file" />
+				<div class="select_img">
+					<img src="${goods.gdsImg}" />
+					<input type="hidden" name="gdsImg" value="${goods.gdsImg}" />
+					<input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}" />
+				</div>
+			
+			<script>
+				$("#gdsImg").change(function(){
+					if(this.files && this.files[0]){
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$(".select_img img").attr("src", data.target.result).width(500);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+			</script>
+			<%=request.getRealPath("/") %>
 			</div>
 			<div class="inputArea">
 				<button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
@@ -207,6 +244,17 @@ if(select_cateCodeRef != null && select_cateCodeRef != '') {
  	// select_cateCod가 부여되지 않는 현상이 있어서 아래 코드로 대체
  	$(".category2").append("<option value='"+ select_cateCode +"'selected='selected'>전체 </option>");
 }
+</script>
+<script>
+	var regExp = /[^0-9]/gi;
+	
+	$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+	$("#gdsStock").keyup(function(){ numCheck($(this)); });
+	
+	function numCheck(selector) {
+		var tempVal = selector.val();
+		selector.val(tempVal.replace(regExp, ""));
+	}
 </script>
 </body>
 </html>

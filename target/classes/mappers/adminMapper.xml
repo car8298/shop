@@ -15,11 +15,11 @@
 
 <!-- 상품 등록 -->
 <insert id="register">
-	insert into tbl_goods ( gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes )
-				   values ( tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes} )
+	insert into tbl_goods ( gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg )
+				   values ( tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg} )
 </insert>
 
-<!-- 상품 목록 -->
+<!-- 상품 목록
 <select id="goodslist" resultType="com.han.vo.GoodsVO">
 	select
 		  gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
@@ -27,6 +27,17 @@
 	      tbl_goods
   order by
   		  gdsNum desc
+</select>
+-->
+
+<select id="goodslist" resultType="com.han.vo.GoodsViewVO">
+	select
+		  g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		  g.gdsImg, g.gdsThumbImg
+	  from
+	  	  tbl_goods g
+	    inner join goods_category c
+	    		on g.cateCode = c.cateCode
 </select>
 
 	<!-- 상품 조회
@@ -42,7 +53,8 @@
 <!-- 상품조회 및 카테고리 -->
 <select id="goodsView" resultType="com.han.vo.GoodsViewVO">
 	select
-		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
 	  from
 	  	tbl_goods g
 	  		inner join goods_category c
@@ -59,7 +71,11 @@
 			cateCode = #{cateCode},
 			gdsPrice = #{gdsPrice},
 			gdsStock = #{gdsStock},
-			gdsDes = #{gdsDes}
+			gdsDes = #{gdsDes},
+			
+			gdsImg = #{gdsImg},
+			gdsThumbImg = #{gdsThumbImg}
+			
 	  where 
 	  		gdsNum = ${gdsNum}
 </update>

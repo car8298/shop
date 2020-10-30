@@ -20,6 +20,12 @@
 		${member.userName}님 환영합니다.
 	</li>
 	<li>
+		<a href="/shops/cartList">장바구니</a>
+	</li>
+	<li>
+		<a href="/shops/orderList">주문 내역</a>
+	</li>
+	<li>
 		<a href="/member/logout">로그아웃</a>
 	</li>
 </c:if>
