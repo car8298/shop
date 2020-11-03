@@ -86,4 +86,72 @@
 	where gdsNum = #{gdsNum}
 </delete>
 
+<!-- 모든 유저의 주문 목록 -->
+<select id="orderList" resultType="com.han.vo.OrderVO">
+	select
+		orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount, orderDate, delivery
+	  from
+	  	tbl_order
+</select>
+
+<!-- 특정 주문 목록 -->
+<select id="orderView" resultType="com.han.vo.OrderListVO">
+	select
+		o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount, o.orderDate, o.delivery,
+		d.orderDetailsNum, d.gdsNum, d.cartStock,
+		g.gdsName, g.gdsThumbImg, g.gdsPrice
+	  from
+	  	tbl_order o
+	  		inner join tbl_order_details d
+	  			on o.orderId = d.orderId
+	  		inner join tbl_goods g
+	  			on d.gdsNum = g.gdsNum
+	 where
+	 	o.orderId = #{orderId}
+</select>
+
+<!-- 배송 상태 -->
+<update id="delivery">
+	update tbl_order
+	   set delivery = #{delivery}
+	 where orderId = #{orderId}
+</update>
+
+<!-- 배송완료 시 재고감소 -->
+<update id="ChangeStock">
+	update tbl_goods
+	   set gdsStock = gdsStock - #{gdsStock}
+	 where gdsNum = #{gdsNum}
+</update>
+
+<!-- 재고감소 보조 쿼리 -->
+<select id="ChangeStock_sub" resultType="com.han.vo.OrderDetailVO">
+	select
+		orderId, gdsNum, cartStock
+	  from
+	  	tbl_order_details
+	 where
+	 	orderId = #{orderId}
+</select>
+
+<!-- 모든 댓글 확인 -->
+<select id="allReply" resultType="com.han.vo.ReplyListVO">
+	select
+		r.gdsNum, r.userId, r.repNum, r.repCon, r.repDate,
+		m.userName,
+		g.gdsName
+	  from
+	  	tbl_reply r
+	  	inner join tbl_member m
+	  			on r.userId = m.userId
+	  	inner join tbl_goods g
+	  			on r.gdsNum = g.gdsNum
+</select>
+
+<!-- 관리자가 댓글 지우기 -->
+<delete id="deleteReply">
+	delete tbl_reply
+		where repNum = #{repNum}
+</delete>
+
 </mapper>

@@ -22,6 +22,7 @@ import com.han.vo.CartVO;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.MemberVO;
 import com.han.vo.OrderDetailVO;
+import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
@@ -242,5 +243,23 @@ public class ShopController {
 		
 		model.addAttribute("orderList", orderList);
 	}
+	
+	//특정 목록
+	@RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	public void getOrderList(HttpSession session, @RequestParam("n") String orderId, 
+							OrderVO order, Model model) throws Exception {
+		logger.info("get order view");
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		String userId = member.getUserId();
+		
+		order.setUserId(userId);
+		order.setOrderId(orderId);
+		
+		List<OrderListVO> orderView = service.orderView(order);
+		
+		model.addAttribute("orderView", orderView);
+	}
+	
 							
 }

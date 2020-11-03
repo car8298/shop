@@ -6,6 +6,7 @@ import com.han.vo.CartListVO;
 import com.han.vo.CartVO;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.OrderDetailVO;
+import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
@@ -53,4 +54,7 @@ public interface ShopService {
 	
 	//접속유저 주문목록
 	public List<OrderVO> orderList(OrderVO order) throws Exception;
+	
+	//특정 주문 목록
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 }

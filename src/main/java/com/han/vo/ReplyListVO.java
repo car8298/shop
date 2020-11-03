@@ -11,6 +11,16 @@ public class ReplyListVO {
 	private Date repDate;
 	
 	private String userName;
+
+	private String gdsName;
+	
+	public String getGdsName() {
+		return gdsName;
+	}
+
+	public void setGdsName(String gdsName) {
+		this.gdsName = gdsName;
+	}
 	
 	public int getGdsNum() {
 		return gdsNum;

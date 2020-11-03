@@ -5,6 +5,9 @@ import java.util.List;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.OrderListVO;
+import com.han.vo.OrderVO;
+import com.han.vo.ReplyListVO;
 
 public interface adminDAO {
 	
@@ -25,4 +28,22 @@ public interface adminDAO {
 	
 	//상품삭제
 	public void goodsDelete(int gdsNum) throws Exception;
+	
+	//주문 목록
+	public List<OrderVO> orderList() throws Exception;
+	
+	//특정 주문 목록
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+	
+	//배송상태 변경
+	public void delivery(OrderVO order) throws Exception;
+	
+	//배송완료 시 재고 감소
+	public void changeStock(GoodsVO goods) throws Exception;
+	
+	//모든 댓글 조회
+	public List<ReplyListVO> allReply() throws Exception;
+	
+	//댓글 삭제
+	public void deleteReply(int repNum) throws Exception;
 }

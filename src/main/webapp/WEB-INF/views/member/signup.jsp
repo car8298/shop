@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>shop</title>
+	<link rel="stylesheet" href="/resources/css/user/member/default.css" />
+	
 </head>
 <body>
 <div id="root">
@@ -17,12 +19,16 @@
 		</div>
 	</nav>
 	
+	<aside id="aside">
+			<%@ include file="../include/aside.jsp" %>
+	</aside>
+	
 	<section id="container">
 		<div id="container_box">
 			<section id="content">
 				 <form role="form" method="post" autocomplete="off">
 				  <div class="input_area">
-				   <label for="userId">아이디</label>
+				   <label for="userId">아  이  디</label>
 				   <input type="email" id="userId" name="userId" placeholder="example@email.com" required="required" />      
 				  </div>
 				  
@@ -32,12 +38,12 @@
 				  </div>
 				  
 				  <div class="input_area">
-				   <label for="userName">닉네임</label>
+				   <label for="userName">닉  네  임 </label>
 				   <input type="text" id="userName" name="userName" placeholder="닉네임을 입력해주세요" required="required" />      
 				  </div>
 				  
 				  <div class="input_area">
-				   <label for="userPhon">연락처</label>
+				   <label for="userPhon">연  락  처 </label>
 				   <input type="text" id="userPhon" name="userPhon" placeholder="연락처를 입력해주세요" required="required" />      
 				  </div>
 				  

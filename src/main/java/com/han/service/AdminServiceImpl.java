@@ -10,6 +10,9 @@ import com.han.dao.adminDAO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.OrderListVO;
+import com.han.vo.OrderVO;
+import com.han.vo.ReplyListVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -53,5 +56,41 @@ public class AdminServiceImpl implements AdminService{
 	public void goodsDelete(int gdsNum) throws Exception{
 		dao.goodsDelete(gdsNum);
 	}
+	
+	//주문 목록
+	@Override
+	public List<OrderVO> orderList() throws Exception{
+		return dao.orderList();
+	}
+	
+	//특정 주문 목록
+	@Override
+	public List<OrderListVO> orderView(OrderVO order) throws Exception{
+		return dao.orderView(order);
+		
+	}
+	
+	//배송상태 변경
+	@Override
+	public void delivery(OrderVO order) throws Exception{
+		dao.delivery(order);
+	}
 
+	//재고수량 변경
+	@Override
+	public void changeStock(GoodsVO goods) throws Exception{
+		dao.changeStock(goods);
+	}
+	
+	//모든 댓글 조회
+	@Override
+	public List<ReplyListVO> allReply() throws Exception{
+		return dao.allReply();
+	}
+	
+	//댓글 삭제
+	@Override
+	public void deleteReply(int repNum) throws Exception{
+		dao.deleteReply(repNum);
+	}
 }
