@@ -10,13 +10,19 @@
 							userId,
 							userPass,
 							userName,
-							userPhon
+							userPhon,
+							userAddr1,
+							userAddr2,
+							userAddr3
 							)
 				values		(
 							#{userId},
 							#{userPass},
 							#{userName},
-							#{userPhon}
+							#{userPhon},
+							#{userAddr1},
+							#{userAddr2},
+							#{userAddr3}
 							)					
 	</insert>
 	
