@@ -24,7 +24,7 @@
 		nav#nav { padding:10px; text-align:right; }
 		nav#nav ul li { display:inline-block; margin-left:10px; }
 		
-		  section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
+	  	section#container { padding:20px 0; border-top:2px solid #eee; border-bottom:2px solid #eee; }
 		section#container::after { content:""; display:block; clear:both; }
 		aside { float:left; width:200px; }
 		div#container_box { float:right; width:calc(100% - 200px - 20px); }
@@ -33,7 +33,7 @@
 		aside ul li a { display:block; width:100%; padding:10px 0;}
 		aside ul li a:hover { background:#eee; }
 		
-		footer#footer { background:#f9f9f9; padding:20px; }
+		footer#footer { background:#f9f9f9; padding:20px; margin-top:200px; }
 		footer#footer ul li { display:inline-block; margin-right:10px; }
 	</style>
 <style>

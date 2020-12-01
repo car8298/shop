@@ -154,4 +154,11 @@
 		where repNum = #{repNum}
 </delete>
 
+<!-- 유저목록 -->
+<select id="userList" resultType="com.han.vo.MemberVO">
+	select
+		userId, userName, userPhon, regiDate, verify
+	  from
+	    tbl_member
+</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.MemberVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
@@ -46,4 +47,7 @@ public interface adminDAO {
 	
 	//댓글 삭제
 	public void deleteReply(int repNum) throws Exception;
+	
+	//유저 목록
+	public List<MemberVO> userList() throws Exception;
 }

@@ -70,7 +70,7 @@
 	       text-align:center; padding:10px; border-bottom:2px solid #666; }
 	#container_box table tr:hover { background:#eee; }
 	#container_box table td { padding:10px; text-align:center; }
-	#container_box table img { width:150px; he	ight:auto; }
+	#container_box table img { width:150px; height:auto; }
 
 	.orderInfo { border:5px solid #eee; padding:10px 20px; margin:20px 0;}
 	.orderInfo span { font-size:20px; font-weight:bold; display:inline-block; width:90px; }
@@ -104,9 +104,6 @@
 	</nav>
 	
 	<section id="container">
-		<aside>
-			<%@ include file="../include/aside.jsp" %>
-		</aside>
 		<div id="container_box">
 			
 			<div class="orderInfo">
@@ -170,6 +167,12 @@
 			</ul>
 		</div>
 	</section>
+	
+		
+	<aside id="aside">
+		<%@ include file="../include/aside.jsp" %>
+	</aside>
+	
 	<footer id="footer">
 		<div id="footer_box">
 			<%@ include file="../include/footer.jsp" %>

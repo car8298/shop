@@ -47,7 +47,7 @@
 	aside#aside li:hover > ul.low li a:hover { background:#eee; }
 	aside#aside li > ul.low li { width:180px; }
 	
-	footer#footer { margin-top:100px; border-radius:50px 50px 0 0; }
+	footer#footer { margin-top:200px; border-radius:50px 50px 0 0; }
 	footer#footer div#footer_box { padding:0 20px; }
 
 </style>
@@ -76,10 +76,9 @@
 	
 	<section id="container">
 		<div id="container_box">
-			본문 영역
 		</div>
 	</section>
-
+	<div></div>
 	<footer id="footer">
 		<div id="footer_box">
 			<%@ include file="include/footer.jsp" %>

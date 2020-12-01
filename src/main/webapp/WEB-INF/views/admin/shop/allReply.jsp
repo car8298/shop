@@ -50,8 +50,8 @@
  	aside#aside li:hover > ul.low li a:hover { background:#eee; } 
  	aside#aside li > ul.low li { width:180px; } 
 	
- 	footer#footer { margin-top:100px; border-radius:50px 50px 0 0; } 
- 	footer#footer div#footer_box { padding:0 20px; } 
+ 	footer#footer { background:#f9f9f9; padding:20px; }
+	footer#footer ul li { display:inline-block; margin-right:10px; }
 
 </style>
 
@@ -97,10 +97,10 @@
 		</div>
 	</nav>
 	
+	
+	
+	
 	<section id="container">
-		<aside>
-			<%@ include file="../include/aside.jsp" %>
-		</aside>
 		<div id="container_box">
 		<ul>
 			<c:forEach items="${reply}" var="reply">
@@ -131,6 +131,12 @@
 			</c:forEach>
 		</ul>
 		</div>
+		<aside id="aside">
+		<div id="aside_box">
+			<%@ include file="../include/aside.jsp" %>
+		</div>
+	</aside>
+		
 		
 	</section>
 	<footer id="footer">

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.MemberVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
@@ -94,4 +95,11 @@ public class adminDAOImpl implements adminDAO {
 	public void deleteReply(int repNum) throws Exception{
 		sql.delete(namespace + ".deleteReply", repNum);
 	}
+	
+	//유저 목록
+	@Override
+	public List<MemberVO> userList() throws Exception{
+		return sql.selectList(namespace + ".userList");
+	}
+
 }

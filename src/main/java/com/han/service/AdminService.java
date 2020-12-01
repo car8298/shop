@@ -5,6 +5,7 @@ import java.util.List;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.MemberVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
@@ -34,4 +35,6 @@ public interface AdminService {
 	public List<ReplyListVO> allReply() throws Exception;
 	
 	public void deleteReply(int repNum) throws Exception;
+	
+	public List<MemberVO> userList() throws Exception;
 }

@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.han.service.AdminService;
 import com.han.utils.UploadFileUtils;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
+import com.han.vo.MemberVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
 import com.han.vo.ReplyListVO;
@@ -264,6 +264,24 @@ public class AdminController {
 		adminService.deleteReply(repNum);
 		
 		return "redirect:/admin/shop/allReply";
+	}
+	
+	//유저 목록
+	@RequestMapping(value = "/shop/userList", method = RequestMethod.GET)
+	public void getUserList(Model model) throws Exception {
+		logger.info("get user list");
+		
+		List<MemberVO> member = adminService.userList();
+		
+		model.addAttribute("member", member);
+	}
+	
+	//관리자부여
+	@RequestMapping(value = "/shop/userList", method = RequestMethod.POST)
+	public String changeVerify(MemberVO member) throws Exception {
+		logger.info("post verify change");
+		
+		return "redirect:/admin/shop/userList";
 	}
 
 }

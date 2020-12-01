@@ -28,4 +28,23 @@ public class MemberDAOImpl implements MemberDAO{
 		return sql.selectOne(namespace + ".signin", vo);
 	}
 	
+	
+	// 비밀번호 찾기
+	@Override
+	public MemberVO findpass(MemberVO vo) throws Exception {
+		return sql.selectOne(namespace + ".signin", vo);
+	}
+	
+	//비밀번호 찾기(비밀번호 업데이트)
+	@Override
+	public void updatePass(MemberVO vo) throws Exception {
+		sql.update(namespace + ".updatepass", vo);
+	}
+	
+	//회원정보 변경
+	@Override
+	public void updateInfo(MemberVO vo) throws Exception {
+		sql.update(namespace + ".updateInfo", vo);
+	}
+
 }

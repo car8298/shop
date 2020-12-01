@@ -90,6 +90,11 @@
 	</nav>
 	
 	<section id="container">
+		<aside>
+			<div>
+			<%@ include file="../include/aside.jsp" %>
+			</div>
+		</aside>
 		<div id="container_box">
 			<section id="content">
 				<ul class="orderList">
@@ -108,12 +113,7 @@
 				</ul>
 			
 			</section>
-	
-		<aside id="aside">
-			<div id="aside_box">
-				<%@ include file="../include/aside.jsp" %>
-			</div>
-		</aside>
+
 		</div>
 	</section>
 	<footer id="footer">

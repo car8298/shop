@@ -35,4 +35,20 @@
 		where
 			userId = #{userId}
 	</select>
+	
+	<!-- 비밀번호 찾기 시 업데이트 -->
+	<update id="updatepass">
+		update tbl_member
+		   set userPass = #{userPass}
+		 where userId = #{userId}
+	</update>
+	
+	<!-- 회원정보 업데이트 -->
+	<update id="updateInfo">
+		update tbl_member
+			set userPass = #{userPass},
+				userName = #{userName},
+				userPhon = #{userPhon}
+		 where userId = #{userId}
+	</update>
 </mapper>

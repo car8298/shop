@@ -25,12 +25,11 @@
 	
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="C:\Dev\WorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\shop\resources"/>
+		<beans:constructor-arg value="/var/lib/tomcat8/webapps/shop/"/>
 	</beans:bean>
 	
 	<!-- 일반 파일 업로드 경로 -->
-	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
-	
+<!-- 	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />  -->
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
 		<beans:property name="maxUploadSize" value="10485760"/>
 	</beans:bean>
@@ -38,6 +37,7 @@
 	<!-- CK에디터 파일업로드 관련 -->
 	<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
 	<beans:bean id="AdminInterceptor" class="com.han.interceptor.AdminInterceptor"></beans:bean>
+	
 	
 	<!-- 대체 이미지 경로 -->
 	<resources mapping="/images/**" location="/resources/images/" />

@@ -31,5 +31,21 @@ public class MemberServiceImpl implements MemberService{
 	public void logOut(HttpSession session) throws Exception {
 		session.invalidate();
 	}
+	
+	//비밀번호 찾기
+	@Override
+	public MemberVO findpass(MemberVO vo) throws Exception {
+		return dao.findpass(vo);
+	}
+	
+//	//비밀번호 찾기(업데이트)
+	public void updatePass(MemberVO vo) throws Exception {
+		dao.updatePass(vo);
+	}
+	
+	//회원정보 업데이트
+	public void updateInfo(MemberVO vo) throws Exception {
+		dao.updateInfo(vo);
+	}
 
 }

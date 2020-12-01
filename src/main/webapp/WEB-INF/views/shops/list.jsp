@@ -48,7 +48,7 @@
  	aside#aside li:hover > ul.low li a:hover { background:#eee; } 
  	aside#aside li > ul.low li { width:180px; } 
 	
- 	footer#footer { margin-top:100px; border-radius:50px 50px 0 0; } 
+ 	footer#footer { margin-top:200px; border-radius:10px 10px 0 0; text-align:center;} 
  	footer#footer div#footer_box { padding:0 20px; } 
 
 </style>
@@ -83,7 +83,7 @@
 					<c:forEach items="${list}" var="list">
 					<li>
 						<div class="goodsThumb">
-							<img src="${list.gdsThumbImg}">
+							<img src=${list.gdsThumbImg}>
 						</div>
 						<div class="goodsName">
 							<a href="/shops/view?n=${list.gdsNum}">${list.gdsName}</a>
