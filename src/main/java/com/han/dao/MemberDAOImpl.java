@@ -46,5 +46,10 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updateInfo(MemberVO vo) throws Exception {
 		sql.update(namespace + ".updateInfo", vo);
 	}
-
+	
+	//아이디 중복체크
+	@Override
+	public int idCheck(MemberVO vo) throws Exception {
+		return sql.selectOne(namespace + ".idcheck", vo);
+	}
 }

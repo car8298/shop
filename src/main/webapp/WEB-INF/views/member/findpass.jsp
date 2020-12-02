@@ -91,9 +91,10 @@
 			<button type="submit" id=findpass_Btn>비밀번호 찾기</button>
 		</div>
 		
-		<c:if test="${msg == false}">
+		 <c:if test="${msg == false}">
 	    	<p style="color:#f00;">아이디를 확인하여 주시기 바랍니다.</p>
-	    </c:if>
+		 </c:if>
+
 		</form>
 	</section>
 

@@ -18,4 +18,7 @@ public interface MemberDAO {
 	
 	//회원정보 변경
 	public void updateInfo(MemberVO vo) throws Exception;
+	
+	//아이디 중복체크
+	public int idCheck(MemberVO vo) throws Exception;
 }

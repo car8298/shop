@@ -51,4 +51,11 @@
 				userPhon = #{userPhon}
 		 where userId = #{userId}
 	</update>
+	
+	<!-- 아이디 중복확인 -->
+	<select id="idcheck" resultType="Integer">
+		select count(*)
+		  from tbl_member
+		 where userId = #{userId}
+	</select>
 </mapper>

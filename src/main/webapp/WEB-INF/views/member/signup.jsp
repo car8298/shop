@@ -3,6 +3,8 @@
 <head>
 	<title>shop</title>
 	<link rel="stylesheet" href="/resources/css/user/member/default.css" />
+	<script src="/resources/jquery/jquery-3.4.1.min.js"></script>
+	
 	
 </head>
 <body>
@@ -29,7 +31,39 @@
 				 <form role="form" method="post" autocomplete="off">
 				  <div class="input_area">
 				   <label for="userId">아  이  디</label>
-				   <input type="email" id="userId" name="userId" placeholder="example@email.com" required="required" />      
+				   <input type="email" id="userId" name="userId" placeholder="example@email.com" required="required" />
+				   <button type="button" id="idchk" name="idchk" onclick="fn_idchk();">중복확인</button>
+				   <div>
+				   <span id="alert-success" style="display:none; color: #0a4fcf; "> 사용가능한 아이디 입니다. </span>
+				   <span id="alert-danger" style="display:none; color: #d92742; font-weight:bold;"> 아이디가 존재합니다. 다른아이디를 입력해주세요. </span>
+				   </div>
+				   <script>
+				   	var idck = 0;
+				   	
+				   	function fn_idchk(){
+				   		
+			   			$.ajax({
+			   				type : "post",
+			   				data : {"userId" : $("#userId").val()},
+			   				url : "idcheck.do",
+			   				dataType : "json",
+			   				success : function(data) {
+			   					if (data > 0) {
+			   						$("#alert-success").css('display', 'none');
+					                $("#alert-danger").css('display', 'inline-block');
+					                $("#userId").focus();
+					                document.getElementById("signup_btn").disabled = true;
+			   					}
+			   					else {
+			   						$("#alert-success").css('display', 'inline-block');
+					                $("#alert-danger").css('display', 'none');
+					                $("#userPass").focus();
+					                document.getElementById("signup_btn").disabled = false;
+			   					}
+			   				}
+			   			});	
+				   	}
+				   </script>  
 				  </div>
 				  
 				  <div class="input_area">
@@ -153,7 +187,7 @@
 			    }
 			</script>
 				  
-				  <button type="submit" id="signup_btn" name="signup_btn">회원가입</button>
+				  <button type="submit" id="signup_btn" name="signup_btn" >회원가입</button>
 				  
 				 </form>   
 				</section>

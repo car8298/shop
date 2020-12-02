@@ -35,7 +35,7 @@
 	nav#nav div#nav_box li { display:inline-block; margin:0 10px; }
 	nav#nav div#nav_box li a { color:#333; }
 	
-	section#container { }
+	section#container { }	
 	
 	div#input_id { margin-left:350px; }
 	button#signin_btn { margin-left:260px; }
@@ -107,10 +107,16 @@
 	  			location.href = "/member/findpass";
 	  		});
 	  </script>
-	  
-	  <c:if test="${msg == false}">
-	   <p style="color:#f00;">로그인에 실패했습니다.</p>
-	  </c:if>
+
+		<c:choose>
+		 <c:when test="${msg == false}">
+	    	<p style="color:#f00;">로그인에 실패했습니다.</p>
+		 </c:when>
+		 
+		 <c:when test="${txt == false}">
+	   		<script> alert("아이디로 입력한 이메일로 임시 비밀번호가 전송되었습니다. 로그인 후 비밀번호를 변경해주시기 바랍니다."); </script>
+	  	 </c:when>
+	  	</c:choose>
 	  
 	 </form>  
 	</section>

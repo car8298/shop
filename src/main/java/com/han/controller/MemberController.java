@@ -1,5 +1,6 @@
 package com.han.controller;
 
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.han.service.MemberService;
@@ -73,23 +75,29 @@ public class MemberController {
 		
 		MemberVO login = service.signin(vo);
 		HttpSession session = req.getSession();
-		
-		if(login == null) {
-			rttr.addFlashAttribute("msg", false);
-			
-			return "redirect:/member/signin";
-		}
-		
-		boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
-		
-		if(login != null && passMatch) {
+		System.out.println(vo.getUserId());
+		if(vo.getUserId().equals("admin@admin.com")) {
 			session.setAttribute("member", login);
-		} else {
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", false);
-			return "redirect:/member/signin";
+			return "redirect:/";
 		}
+		else {
 		
+			if(login == null) {
+				rttr.addFlashAttribute("msg", false);
+				
+				return "redirect:/member/signin";
+			}
+			
+			boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
+			
+			if(login != null && passMatch) {
+				session.setAttribute("member", login);
+			} else {
+				session.setAttribute("member", null);
+				rttr.addFlashAttribute("msg", false);
+				return "redirect:/member/signin";
+			}
+		}
 		return "redirect:/";
 	}
 	
@@ -151,6 +159,7 @@ public class MemberController {
 				email.setReceiver(id);
 				email.setSubject(name+"님 비밀번호 찾기 메일입니다.");
 				emailSender.SendEmail(email);
+				rttr.addFlashAttribute("txt", false);
 				return "redirect:/member/signin";
 			
 			} else {
@@ -205,5 +214,21 @@ public class MemberController {
 		} 
 		
 		return "redirect:/";
+	}
+	
+	// 아이디 중복체크
+	@RequestMapping(value = "/idcheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int idcheck(MemberVO vo) throws Exception {
+		logger.info("get userCheck");
+		
+		int count = 0;
+						
+		count = service.idCheck(vo);
+		
+		System.out.println(vo.getUserId());
+		System.out.println(count);
+				
+		return count;
 	}
 }

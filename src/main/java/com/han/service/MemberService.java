@@ -24,4 +24,7 @@ public interface MemberService {
 	
 	//회원정보 변경
 	public void updateInfo(MemberVO vo) throws Exception;
+	
+	//아이디 중복확인
+	public int idCheck(MemberVO vo) throws Exception;
 }

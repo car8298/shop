@@ -47,5 +47,11 @@ public class MemberServiceImpl implements MemberService{
 	public void updateInfo(MemberVO vo) throws Exception {
 		dao.updateInfo(vo);
 	}
+	
+	//아이디 중복확인
+	@Override
+	public int idCheck(MemberVO vo) throws Exception {
+		return dao.idCheck(vo);
+	}
 
 }
