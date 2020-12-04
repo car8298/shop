@@ -300,9 +300,9 @@ public class AdminController {
 		order.setCarrier(request.getParameter("carriers"));
 		order.setDeliveryCode(request.getParameter("deliveryCode"));		
 		
-		adminService.deliveryRegi(order);
-			
-		return "redirect:/";
+		adminService.deliveryRegi(order);		
+		
+		return "redirect:/admin/shop/orderView?n=" + orderId;
 	}
 
 }

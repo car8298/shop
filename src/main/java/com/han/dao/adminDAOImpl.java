@@ -112,6 +112,8 @@ public class adminDAOImpl implements adminDAO {
 	//택배사 및 송장번호 등록
 	@Override
 	public void deliveryRegi(OrderVO order) throws Exception{
+		System.out.println(namespace + ".deliveryCode");
 		sql.update(namespace + ".deliveryCode", order);
 	}
+	
 }
