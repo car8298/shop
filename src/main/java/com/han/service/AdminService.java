@@ -2,6 +2,7 @@ package com.han.service;
 
 import java.util.List;
 
+import com.han.vo.CarrierVO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
@@ -37,4 +38,8 @@ public interface AdminService {
 	public void deleteReply(int repNum) throws Exception;
 	
 	public List<MemberVO> userList() throws Exception;
+	
+	public List<CarrierVO> carrierList() throws Exception;
+	
+	public void deliveryRegi(OrderVO order) throws Exception;
 }

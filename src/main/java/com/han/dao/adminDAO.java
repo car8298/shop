@@ -2,6 +2,7 @@ package com.han.dao;
 
 import java.util.List;
 
+import com.han.vo.CarrierVO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
@@ -50,4 +51,11 @@ public interface adminDAO {
 	
 	//유저 목록
 	public List<MemberVO> userList() throws Exception;
+	
+	//택배사 목록
+	public List<CarrierVO> carrierLIst() throws Exception;
+	
+	//택배사 및 송장번호 등록
+	public void deliveryRegi(OrderVO order) throws Exception; 
+	
 }

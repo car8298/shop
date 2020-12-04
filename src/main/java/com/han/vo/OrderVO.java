@@ -2,6 +2,8 @@ package com.han.vo;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
 public class OrderVO {
 	
 	private String orderId;
@@ -14,12 +16,26 @@ public class OrderVO {
 	private int amount;
 	private Date orderDate;
 	private String delivery;
+	private String deliveryCode;
+	private String carrier;
 	
 	public String getDelivery() {
 		return delivery;
 	}
 	public void setDelivery(String delivery) {
 		this.delivery = delivery;
+	}
+	public String getCarrier() {
+		return carrier;
+	}
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
+	public String getDeliveryCode() {
+		return deliveryCode;
+	}
+	public void setDeliveryCode(String deliveryCode) {
+		this.deliveryCode = deliveryCode;
 	}
 	public String getOrderId() {
 		return orderId;
@@ -75,5 +91,13 @@ public class OrderVO {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+//	@Override
+//	public String toString() {
+//		return "OrderVO [orderId=" + orderId + ", userId=" + userId + ", orderRec=" + orderRec + ", userAddr1="
+//				+ userAddr1 + ", userAddr2=" + userAddr2 + ", userAddr3=" + userAddr3 + ", orderPhon=" + orderPhon
+//				+ ", amount=" + amount + ", orderDate=" + orderDate + ", delivery=" + delivery + ", deliveryCode="
+//				+ deliveryCode + ", carrier=" + carrier + "]";
+//	}
+//	
 	
 }

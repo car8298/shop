@@ -91,6 +91,8 @@
 						<p><span>수령인</span>${orderList.orderRec}</p>
 						<p><span>주소</span>(${orderList.userAddr1}) ${orderList.userAddr2} ${orderList.userAddr3}</p>
 						<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderList.amount}"/> 원</p>
+						<p><span>송장번호</span>${orderList.deliveryCode}
+						<button Type="button" onclick="window.open('about:blank').location.href='https://tracker.delivery/#/${orderList.carrRef}/${orderList.deliveryCode}';">배송조회</button>
 					</div>
 					</li>
 					</c:forEach>

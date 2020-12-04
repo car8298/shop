@@ -225,10 +225,7 @@ public class MemberController {
 		int count = 0;
 						
 		count = service.idCheck(vo);
-		
-		System.out.println(vo.getUserId());
-		System.out.println(count);
-				
+
 		return count;
 	}
 }

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.han.vo.CarrierVO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
@@ -101,5 +102,16 @@ public class adminDAOImpl implements adminDAO {
 	public List<MemberVO> userList() throws Exception{
 		return sql.selectList(namespace + ".userList");
 	}
-
+	
+	//택배사 목록
+	@Override
+	public List<CarrierVO> carrierLIst() throws Exception{
+		return sql.selectList(namespace + ".carrierList");
+	}
+	
+	//택배사 및 송장번호 등록
+	@Override
+	public void deliveryRegi(OrderVO order) throws Exception{
+		sql.update(namespace + ".deliveryCode", order);
+	}
 }

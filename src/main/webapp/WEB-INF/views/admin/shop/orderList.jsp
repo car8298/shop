@@ -20,7 +20,7 @@
 	nav#nav {}
 	section#container { }
 	section#content { float:right; width:700px; }
-	aside#aside { float:left; width:180px; }
+	aside { float:left; width:180px; }
 	section#container::after { content:""; display:block; clear:both; }
 	footer#footer { background:#eee; padding:20px; }
 	
@@ -35,18 +35,22 @@
 	
  	section#container { } 
 	
- 	aside#aside h3 { font-size:22px; margin_bottom:20px; text-align:center; } 
- 	aside#aside li { font-size:16px; text-align:center; } 
- 	aside#aside li a { color:#000; display:block; padding:10px 0; } 
- 	aside#aside li a:hover { text-decoration:none; background:#eee; } 
+/*  	aside#aside h3 { font-size:22px; margin_bottom:20px; text-align:center; }  */
+/*  	aside#aside li { font-size:16px; text-align:center; }  */
+/*  	aside#aside li a { color:#000; display:block; padding:10px 0; }  */
+/*  	aside#aside li a:hover { text-decoration:none; background:#eee; }  */
 	
- 	aside#aside li { position:relative; } 
- 	aside#aside li:hover { background:#eee; } 
- 	aside#aside li > ul.low { display:none; position:absolute; top:0; left:180px; } 
- 	aside#aside li:hover > ul.low { display:block; } 
- 	aside#aside li:hover > ul.low li a { background:#fff; border:1px solid #eee; } 
- 	aside#aside li:hover > ul.low li a:hover { background:#eee; } 
- 	aside#aside li > ul.low li { width:180px; } 
+/*  	aside#aside li { position:relative; }  */
+/*  	aside#aside li:hover { background:#eee; }  */
+/*  	aside#aside li > ul.low { display:none; position:absolute; top:0; left:180px; }  */
+/*  	aside#aside li:hover > ul.low { display:block; }  */
+/*  	aside#aside li:hover > ul.low li a { background:#fff; border:1px solid #eee; }  */
+/*  	aside#aside li:hover > ul.low li a:hover { background:#eee; }  */
+/*  	aside#aside li > ul.low li { width:180px; }  */
+
+	aside ul li { text-align:center; margin-bottom:10px; }
+	aside ul li a { display:block; width:100%; padding:10px 0;}
+	aside ul li a:hover { background:#eee; }
 	
  	footer#footer { margin-top:100px; border-radius:50px 50px 0 0; } 
  	footer#footer div#footer_box { padding:0 20px; } 

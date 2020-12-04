@@ -20,10 +20,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.han.service.AdminService;
 import com.han.utils.UploadFileUtils;
+import com.han.vo.CarrierVO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
@@ -216,15 +218,17 @@ public class AdminController {
 		model.addAttribute("orderList", orderList);
 	}
 	
-	//주문 상세 목록
+	//주문 상세 목록, 택배사 조회
 	@RequestMapping(value = "/shop/orderView", method = RequestMethod.GET)
 	public void getOrderList(@RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
 		logger.info("get order view");
 		
 		order.setOrderId(orderId);
 		List<OrderListVO> orderView = adminService.orderView(order);
+		List<CarrierVO> carrierList = adminService.carrierList();
 		
 		model.addAttribute("orderView", orderView);
+		model.addAttribute("carrierList", carrierList);
 	}
 	
 	//배송 상태 변경
@@ -282,6 +286,23 @@ public class AdminController {
 		logger.info("post verify change");
 		
 		return "redirect:/admin/shop/userList";
+	}
+	
+	//택배사 등록 및 송장번호 등록
+	@RequestMapping(value = "/shop/deliveryRegi.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String deliveryRegi(OrderVO order, HttpServletRequest request) throws Exception {
+		logger.info("post deliveryRegi");
+		
+		String orderId = request.getParameter("orderId");
+
+		order.setOrderId(orderId);
+		order.setCarrier(request.getParameter("carriers"));
+		order.setDeliveryCode(request.getParameter("deliveryCode"));		
+		
+		adminService.deliveryRegi(order);
+			
+		return "redirect:/";
 	}
 
 }

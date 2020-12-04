@@ -99,13 +99,16 @@
 	select
 		o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount, o.orderDate, o.delivery,
 		d.orderDetailsNum, d.gdsNum, d.cartStock,
-		g.gdsName, g.gdsThumbImg, g.gdsPrice
+		g.gdsName, g.gdsThumbImg, g.gdsPrice,
+		c.carrCode
 	  from
 	  	tbl_order o
 	  		inner join tbl_order_details d
 	  			on o.orderId = d.orderId
 	  		inner join tbl_goods g
 	  			on d.gdsNum = g.gdsNum
+	  		inner join carriers c
+	  			on o.carrier = c.carrCode
 	 where
 	 	o.orderId = #{orderId}
 </select>
@@ -117,8 +120,16 @@
 	 where orderId = #{orderId}
 </update>
 
+<!-- 송장번호 등록 -->
+<update id="deliveryCode">
+	update tbl_order
+	   set deliveryCode = #{deliveryCode},
+	   	   carrier = (select carrCode from carriers where carrName = #{carrier})
+	 where orderId = #{orderId}
+</update>
+
 <!-- 배송완료 시 재고감소 -->
-<update id="ChangeStock">
+<update id="ChangeStock"> 
 	update tbl_goods
 	   set gdsStock = gdsStock - #{gdsStock}
 	 where gdsNum = #{gdsNum}
@@ -160,5 +171,13 @@
 		userId, userName, userPhon, regiDate, verify
 	  from
 	    tbl_member
+</select>
+
+<!-- 택배사 조회 -->
+<select id="carrierList" resultType="com.han.vo.CarrierVO">
+	select
+		carrCode, carrName, carrRef, carrTel
+	  from
+	  	carriers
 </select>
 </mapper>

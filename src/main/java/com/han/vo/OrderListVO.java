@@ -23,6 +23,15 @@ public class OrderListVO {
 	private int gdsPrice;
 	
 	private String delivery;
+	private String deliveryCode;
+	private String carrier;
+	
+	public String getCarrier() {
+		return carrier;
+	}
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
 	
 	public String getOrderId() {
 		return orderId;
@@ -120,5 +129,12 @@ public class OrderListVO {
 	}
 	public void setDelivery(String delivery) {
 		this.delivery = delivery;
+	}
+	
+	public String getDeliveryCode() {
+		return deliveryCode;
+	}
+	public void setDeliveryCode(String deliveryCode) {
+		this.deliveryCode = deliveryCode;
 	}
 }

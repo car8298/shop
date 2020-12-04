@@ -22,9 +22,15 @@
 	nav#nav {}
 	section#container { }
 	section#content { float:right; width:700px; }
-	aside#aside { float:left; width:180px; }
+	aside { float:left; width:180px; }
+	div#aside { float:left; margin-top:20px; }
+	div#container_box { float:right; width:700px;  }
 	section#container::after { content:""; display:block; clear:both; }
 	footer#footer { background:#eee; padding:20px; }
+	
+	aside ul li { text-align:center; margin-bottom:10px; }
+	aside ul li a { display:block; width:100%; padding:10px 0;}
+	aside ul li a:hover { background:#eee; }
 	
 	
 	header#header div#header_box { text-align:center; padding:30px 0; }
@@ -37,18 +43,18 @@
 	
  	section#container { } 
 	
- 	aside#aside h3 { font-size:22px; margin_bottom:20px; text-align:center; } 
- 	aside#aside li { font-size:16px; text-align:center; } 
- 	aside#aside li a { color:#000; display:block; padding:10px 0; } 
- 	aside#aside li a:hover { text-decoration:none; background:#eee; } 
+/*  	aside#aside h3 { font-size:92px; margin_bottom:20px; text-align:center; }  */
+/*  	aside#aside li { font-size:16px; text-align:center; }  */
+/*  	aside#aside li a { color:#000; display:block; padding:10px 0; }  */
+/*  	aside#aside li a:hover { text-decoration:none; background:#eee; }  */
 	
- 	aside#aside li { position:relative; } 
- 	aside#aside li:hover { background:#eee; } 
- 	aside#aside li > ul.low { display:none; position:absolute; top:0; left:180px; } 
- 	aside#aside li:hover > ul.low { display:block; } 
- 	aside#aside li:hover > ul.low li a { background:#fff; border:1px solid #eee; } 
- 	aside#aside li:hover > ul.low li a:hover { background:#eee; } 
- 	aside#aside li > ul.low li { width:180px; } 
+/*  	aside#aside li { position:relative; }  */
+/*  	aside#aside li:hover { background:#eee; }  */
+/*  	aside#aside li > ul.low { display:none; position:absolute; top:0; left:180px; }  */
+/*  	aside#aside li:hover > ul.low { display:block; }  */
+/*  	aside#aside li:hover > ul.low li a { background:#fff; border:1px solid #eee; }  */
+/*  	aside#aside li:hover > ul.low li a:hover { background:#eee; }  */
+/*  	aside#aside li > ul.low li { width:180px; }  */
 	
  	footer#footer { margin-top:100px; border-radius:50px 50px 0 0; } 
  	footer#footer div#footer_box { padding:0 20px; } 
@@ -56,24 +62,27 @@
 </style>
 
 <style>
-	section#content ul li { display:inline-block; margin:10px; }
-	section#content div.goodsThumb img { width:200px; height:200px; }
-	section#content div.goodsName { padding:10px; 0; text-align:center; }
-	section#content div.goodsName a { color:#000; }
+/* 	section#content ul li { display:inline-block; margin:10px; } */
+/* 	section#content div.goodsThumb img { width:200px; height:200px; } */
+/* 	section#content div.goodsName { padding:10px; 0; text-align:center; } */
+/* 	section#content div.goodsName a { color:#000; } */
 
 </style>
 
 <style>
 
-	#container_box table { width:900px; }
-	#container_box table th { font-size:20px; font-weight:bold;
-	       text-align:center; padding:10px; border-bottom:2px solid #666; }
-	#container_box table tr:hover { background:#eee; }
-	#container_box table td { padding:10px; text-align:center; }
-	#container_box table img { width:150px; height:auto; }
+/* 	#container_box table { width:700px; } */
+/* 	#container_box table th { font-size:20px; font-weight:bold; */
+/* 	       text-align:center; padding:10px; border-bottom:2px solid #666; } */
+/* 	#container_box table tr:hover { background:#eee; } */
+/* 	#container_box table td { padding:10px; text-align:center; } */
+/* 	#container_box table img { width:150px; height:auto; } */
+
+	div#container_box ul li { border:5px solid #eee; padding:10px 20px; margin-bottom:20px; }
+	div#container_box .orderlist span { font-size:20px; font-weight:bold; display:inline-block; width:90px; margin-right:10px; }
 
 	.orderInfo { border:5px solid #eee; padding:10px 20px; margin:20px 0;}
-	.orderInfo span { font-size:20px; font-weight:bold; display:inline-block; width:90px; }
+	.orderInfo span { font-size:20px; font-weight:bold; display:inline-block; width:100px; }
 	
 	.orderView li { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid #999; }
 	.orderView li::after { content:""; display:block; clear:both; }
@@ -104,6 +113,11 @@
 	</nav>
 	
 	<section id="container">
+		<aside>
+			<div id="aside">
+				<%@ include file="../include/aside.jsp" %>
+			</div>
+		</aside>
 		<div id="container_box">
 			
 			<div class="orderInfo">
@@ -115,6 +129,30 @@
 						<p><span>주소</span>(${orderView.userAddr1}) ${orderView.userAddr2} ${orderView.userAddr3}</p>
 						<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.amount}" /> 원</p>
 						<p><span>상태</span>${orderView.delivery}</p>
+						<p><span>택배사</span>
+						
+						<input type="hidden" id="orderId" name="orderId" value="${orderView.orderId}" />
+						<select id="carriers" class="carriers">
+							<option selected>택배사</option>
+							<c:forEach items="${carrierList}" var="carriers">
+								<option><c:out value="${carriers.carrName}" /></option>
+							</c:forEach>
+						</select>
+						<p><span>송장번호</span> 
+						<input type="text" id="deliveryCode" />
+						<button type="button" id="deliveryRegi" name="deliveryRegi" onclick="fn_deliveryRegi();">배송정보 등록</button>
+						<script>
+							function fn_deliveryRegi() {
+								$.ajax({
+					   				type : "post",
+					   				data : {"deliveryCode" : $("#deliveryCode").val(),
+					   						"carriers" : $("#carriers").val(),	
+					   						"orderId" : $("#orderId").val()},
+					   				url : "deliveryRegi.do",
+					   				dataType : "json"				   		
+					   			});
+							}
+						</script>
 						
 						<div class="deliveryChange">
 							<form role="form" method="post" class="deliveryForm">
@@ -167,11 +205,6 @@
 			</ul>
 		</div>
 	</section>
-	
-		
-	<aside id="aside">
-		<%@ include file="../include/aside.jsp" %>
-	</aside>
 	
 	<footer id="footer">
 		<div id="footer_box">

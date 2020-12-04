@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.han.dao.adminDAO;
+import com.han.vo.CarrierVO;
 import com.han.vo.CategoryVO;
 import com.han.vo.GoodsVO;
 import com.han.vo.GoodsViewVO;
@@ -101,4 +102,15 @@ public class AdminServiceImpl implements AdminService{
 		return dao.userList();
 	}
 
+	//택배사 목록
+	@Override
+	public List<CarrierVO> carrierList() throws Exception{
+		return dao.carrierLIst();
+	}
+	
+	//송장 및 택배사 등록
+	@Override
+	public void deliveryRegi(OrderVO order) throws Exception {
+		dao.deliveryRegi(order);
+	}
 }
