@@ -97,7 +97,7 @@
 <!-- 특정 주문 목록 -->
 <select id="orderView" resultType="com.han.vo.OrderListVO">
 	select
-		o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount, o.orderDate, o.delivery,
+		o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount, o.orderDate, o.delivery, o.deliveryCode, o.carrier,
 		d.orderDetailsNum, d.gdsNum, d.cartStock,
 		g.gdsName, g.gdsThumbImg, g.gdsPrice,
 		c.carrName

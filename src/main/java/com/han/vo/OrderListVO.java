@@ -25,6 +25,7 @@ public class OrderListVO {
 	private String delivery;
 	private String deliveryCode;
 	private String carrier;
+	private String carrName;
 	
 	public String getCarrier() {
 		return carrier;
@@ -136,5 +137,12 @@ public class OrderListVO {
 	}
 	public void setDeliveryCode(String deliveryCode) {
 		this.deliveryCode = deliveryCode;
+	}
+	
+	public String getCarrName() {
+		return carrName;
+	}
+	public void setCarrName(String carrName) {
+		this.carrName = carrName;
 	}
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.han.service.AdminService;
 import com.han.utils.UploadFileUtils;
@@ -291,7 +292,7 @@ public class AdminController {
 	//택배사 등록 및 송장번호 등록
 	@RequestMapping(value = "/shop/deliveryRegi.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String deliveryRegi(OrderVO order, HttpServletRequest request) throws Exception {
+	public String deliveryRegi(OrderVO order, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
 		logger.info("post deliveryRegi");
 		
 		String orderId = request.getParameter("orderId");
@@ -300,7 +301,9 @@ public class AdminController {
 		order.setCarrier(request.getParameter("carriers"));
 		order.setDeliveryCode(request.getParameter("deliveryCode"));		
 		
-		adminService.deliveryRegi(order);		
+		adminService.deliveryRegi(order);
+		
+		rttr.addFlashAttribute("result", "result");
 		
 		return "redirect:/admin/shop/orderView?n=" + orderId;
 	}

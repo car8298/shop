@@ -132,14 +132,23 @@
 						<p><span>택배사</span>
 						
 						<input type="hidden" id="orderId" name="orderId" value="${orderView.orderId}" />
-						<select id="carriers" class="carriers">
-							<option selected>택배사</option>
-							<c:forEach items="${carrierList}" var="carriers">
-								<option><c:out value="${carriers.carrName}" /></option>
-							</c:forEach>
-						</select>
-						<p><span>송장번호</span> 
-						<input type="text" id="deliveryCode" />
+						<c:choose>
+							<c:when test="${orderView.carrier != '00'}">${orderView.carrName}</c:when>
+							<c:when test="${orderView.carrier == '00'}">
+								<select id="carriers" class="carriers">
+									<c:forEach items="${carrierList}" var="carriers">
+										<option><c:out value="${carriers.carrName}" /></option>
+									</c:forEach>
+								</select>
+							</c:when>
+						</c:choose>
+						<p><span>송장번호</span>
+						<c:choose>
+							<c:when test="${orderView.deliveryCode != '000000000'}">${orderView.deliveryCode}</c:when>
+							<c:when test="${orderView.deliveryCode == '000000000'}">
+								<input type="text" id="deliveryCode" placeholder="송장번호를 입력하세요!" />
+							</c:when>
+						</c:choose>
 						<button type="button" id="deliveryRegi" name="deliveryRegi" onclick="fn_deliveryRegi();">배송정보 등록</button>
 						<script>
 							function fn_deliveryRegi() {
@@ -149,10 +158,16 @@
 					   						"carriers" : $("#carriers").val(),	
 					   						"orderId" : $("#orderId").val()},
 					   				url : "deliveryRegi.do",
-					   				dataType : "json"				   		
+					   				dataType : "json"
 					   			});
-							}
+								
+								if ("${result == 'result'}"){
+									alert('asdf');
+									location.reload();
+								}
+							};
 						</script>
+						
 						
 						<div class="deliveryChange">
 							<form role="form" method="post" class="deliveryForm">

@@ -134,7 +134,8 @@
 <!-- 특정유저의 오더 목록 -->
 <select id="orderList" resultType="com.han.vo.OrderVO">
 	select
-		orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount, orderDate, delivery, deliveryCode, b.carrName
+		orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount, orderDate, delivery, deliveryCode, 
+		b.carrName, b.carrRef
 	  from
 	    tbl_order a
 	    	inner join carriers b

@@ -19,6 +19,21 @@ public class OrderVO {
 	private String deliveryCode;
 	private String carrier;
 	
+	private String carrName;
+	private String carrRef;
+	
+	public String getCarrName() {
+		return carrName;
+	}
+	public void setCarrName(String carrName) {
+		this.carrName = carrName;
+	}
+	public String getCarrRef() {
+		return carrRef;
+	}
+	public void setCarrRef(String carrRef) {
+		this.carrRef = carrRef;
+	}
 	public String getDelivery() {
 		return delivery;
 	}
