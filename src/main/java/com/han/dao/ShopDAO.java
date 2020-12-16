@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.han.vo.CartListVO;
 import com.han.vo.CartVO;
+import com.han.vo.Criteria;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.OrderDetailVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
+import com.han.vo.QnACategoryVO;
+import com.han.vo.QnaVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
 
@@ -60,5 +63,20 @@ public interface ShopDAO {
 	
 	// 특정 주문 목록
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+	
+	// Q&A게시판 리스트
+	public List<QnaVO> qnaList(Criteria cri) throws Exception;
+	
+	// 게시물 갯수
+	public int qnaCount() throws Exception;
+	
+	//Q&A 카테고리
+	public List<QnACategoryVO> qnaCateList() throws Exception;
+	
+	//Q&A 글쓰기
+	public void qnaWrite(QnaVO qna) throws Exception;
+	
+	//Q&A 글보기
+	public QnaVO qnaView(int bno) throws Exception;
 	
 }

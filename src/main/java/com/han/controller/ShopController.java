@@ -5,12 +5,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,11 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.han.service.ShopService;
 import com.han.vo.CartListVO;
 import com.han.vo.CartVO;
+import com.han.vo.Criteria;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.MemberVO;
 import com.han.vo.OrderDetailVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
+import com.han.vo.PageMaker;
+import com.han.vo.QnACategoryVO;
+import com.han.vo.QnaVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
 
@@ -119,7 +125,7 @@ public class ShopController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/view/modifyReply", method = RequestMethod.POST)
-	public int modifyReply(ReplyVO reply, HttpSession session) throws Exception {
+	public int modifyReply(ReplyVO reply, HttpSession session ) throws Exception {
 		logger.info("post modify reply");
 		
 		int result = 0;
@@ -261,5 +267,54 @@ public class ShopController {
 		model.addAttribute("orderView", orderView);
 	}
 	
-							
+	//Q&A게시판
+	@RequestMapping(value = "/qnaBoard/qna", method = RequestMethod.GET)
+	public void getQnA(Model model, Criteria cri) throws Exception {
+		logger.info("get qna");
+
+		model.addAttribute("qna", service.qnaList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.qnaCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	//Q&A 글쓰기 GET
+	@RequestMapping(value = "/qnaBoard/qnaWrite", method = RequestMethod.GET)
+	public void getQnaWrite(Model model) throws Exception {
+		logger.info("get qnaWrite");
+		
+		List<QnACategoryVO> category = service.qnaCategory();
+				
+		model.addAttribute("category", category);
+	}
+	
+	//Q&A 글쓰기 POST
+	@RequestMapping(value = "/qnaBoard/qnaWrite", method = RequestMethod.POST)
+	public String postQnaWrite(HttpSession session, QnaVO qna, HttpServletRequest request) throws Exception {
+		logger.info("post qnaWrite");
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		String category = request.getParameter("codeName");
+		
+		qna.setWriter(member.getUserId());
+		qna.setCodeName(category);
+		
+		service.qnaWrite(qna);
+
+		return "redirect:/shops/qnaBoard/qna";
+	}
+	
+	//Q&A 디테일
+	@RequestMapping(value = "/qnaBoard/qnaView", method = RequestMethod.GET)
+	public void getQnaView(@RequestParam("n") int qnaBno, Model model) throws Exception {
+		logger.info("get qnaView");
+		
+		QnaVO qna = service.qnaView(qnaBno);
+		
+		model.addAttribute("qna", qna);
+	}
+	
 }

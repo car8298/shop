@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import com.han.dao.ShopDAO;
 import com.han.vo.CartListVO;
 import com.han.vo.CartVO;
+import com.han.vo.Criteria;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.OrderDetailVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
+import com.han.vo.QnACategoryVO;
+import com.han.vo.QnaVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
 
@@ -120,6 +123,35 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<OrderListVO> orderView(OrderVO order) throws Exception {
 		return dao.orderView(order);
+	}
+	
+	//Qna 게시판 목록
+	@Override
+	public List<QnaVO> qnaList(Criteria cri) throws Exception {
+		return dao.qnaList(cri);
+	}
+	
+	//Qna 게시판 글 갯수
+	public int qnaCount() throws Exception {
+		return dao.qnaCount();
+	}
+	
+	//Qna 카테고리 불러오기
+	@Override
+	public List<QnACategoryVO> qnaCategory() throws Exception {
+		return dao.qnaCateList();
+	}
+	
+	//Qna 글쓰기
+	@Override
+	public void qnaWrite(QnaVO qna) throws Exception {
+		dao.qnaWrite(qna);
+	}
+	
+	//Qna 글보기
+	@Override
+	public QnaVO qnaView(int bno) throws Exception {
+		return dao.qnaView(bno);
 	}
 
 }

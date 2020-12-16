@@ -162,4 +162,46 @@
 	   	o.orderId = #{orderId}
 </select>
 
+<!-- Q&A 게시판 목록 -->
+<select id="qnaList" resultType="com.han.vo.QnaVO" parameterType="com.han.vo.Criteria">
+	select bno, title, writer, regdate, nvl2(pw, 'Y', 'N') yn, (select codeName from qnaCategory where codeNum = type) type
+	  from (
+	  		select bno, title, writer, regdate, pw, type, ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+	  		  from tbl_qnaboard
+	  		  ) qna
+	  where rnum between #{rowStart} and #{rowEnd}
+	  order by bno desc
+</select>
+
+<!-- 게시판 글 갯수 -->
+<select id="qnaCount" resultType="int">
+	<![CDATA[
+	select count(BNO)
+	  from tbl_qnaBoard
+	 where bno > 0
+	]]>
+</select>
+
+<!-- Q&A 카테고리 -->
+<select id="qnaCategory" resultType="com.han.vo.QnACategoryVO">
+	select codeNum, codeName
+	from qnaCategory
+	order by codeNum
+</select>
+
+<!-- Q&A 글쓰기 -->
+<insert id="qnaWrite">
+	insert into tbl_qnaBoard(bno, title, content, writer, regdate, pw, type)
+					values(QNABOARD_SEQ.nextval, #{title}, #{content}, #{writer}, sysdate, #{pw}, (select codeNum from qnacategory where codeName = #{codeName}))
+</insert>
+
+<!-- Q&A 글보기 -->
+<select id="qnaView" resultType="com.han.vo.QnaVO">
+	select bno, title, content, writer, regdate, b.codeName
+	  from tbl_qnaBoard a
+	inner join qnaCategory b
+	  on a.type = b.codeNum 
+	 where bno = #{bno} 
+</select>
+
 </mapper>

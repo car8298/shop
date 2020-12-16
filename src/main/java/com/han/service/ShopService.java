@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.han.vo.CartListVO;
 import com.han.vo.CartVO;
+import com.han.vo.Criteria;
 import com.han.vo.GoodsViewVO;
 import com.han.vo.OrderDetailVO;
 import com.han.vo.OrderListVO;
 import com.han.vo.OrderVO;
+import com.han.vo.QnACategoryVO;
+import com.han.vo.QnaVO;
 import com.han.vo.ReplyListVO;
 import com.han.vo.ReplyVO;
 
@@ -57,4 +60,19 @@ public interface ShopService {
 	
 	//특정 주문 목록
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+	
+	//Qna 게시판 목록
+	public List<QnaVO> qnaList(Criteria cri) throws Exception;
+	
+	//Qna 게시판 글 갯수
+	public int qnaCount() throws Exception;
+	
+	//Qna 카테고리 불러오기
+	public List<QnACategoryVO> qnaCategory() throws Exception;
+	
+	//Qna 글쓰기
+	public void qnaWrite(QnaVO qna) throws Exception;
+	
+	//Qna 글보기
+	public QnaVO qnaView(int bno) throws Exception;
 }
